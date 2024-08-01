@@ -321,6 +321,7 @@
                  * index = 第几个技能 从0开始
                  */
                 basicCalc(type, level, index) {
+                    level = parseInt(level)
                     level = level < 0 ? 0 : level
                     level = level > 30 ? 30 : level
                     let totalExperience = 0
