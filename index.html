@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小核心進度計算器</title>
+    <link rel="icon" href="ico.ico">
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="positioning.css" />
+    <script src="./vue2.6.14.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="xm_header">
+            <div>小核心進度計算器</div>
+        </div>
+        <div class="xm_main">
+            <div class="flex_column" style="min-width: 440px">
+                <div class="flex flex_align_center">
+                    <div>技能核心：</div>
+                    <input type="checkbox" :checked="checkBoxCheckeds[0][0]" v-model="checkBoxCheckeds[0][0]" />
+                    <input class="input_num" type="number" v-model="inputDatas[0][0]"
+                        :disabled="!checkBoxCheckeds[0][0]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[0][1]" v-model="checkBoxCheckeds[0][1]" />
+                    <input class="input_num" type="number" v-model="inputDatas[0][1]"
+                        :disabled="!checkBoxCheckeds[0][1]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[0][2]" v-model="checkBoxCheckeds[0][2]" />
+                    <input class="input_num" type="number" v-model="inputDatas[0][2]"
+                        :disabled="!checkBoxCheckeds[0][2]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[0][3]" v-model="checkBoxCheckeds[0][3]" />
+                    <input class="input_num" type="number" v-model="inputDatas[0][3]"
+                        :disabled="!checkBoxCheckeds[0][3]" />
+                </div>
+                <div class="flex flex_align_center">
+                    <div>技能核心：</div>
+                    <input type="checkbox" :checked="checkBoxCheckeds[0][4]" v-model="checkBoxCheckeds[0][4]" />
+                    <input class="input_num" type="number" v-model="inputDatas[0][4]"
+                        :disabled="!checkBoxCheckeds[0][4]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[0][5]" v-model="checkBoxCheckeds[0][5]" />
+                    <input class="input_num" type="number" v-model="inputDatas[0][5]"
+                        :disabled="!checkBoxCheckeds[0][5]" />
+                </div>
+                <div class="flex flex_align_center">
+                    <div>精通核心：</div>
+                    <input type="checkbox" :checked="checkBoxCheckeds[1][0]" v-model="checkBoxCheckeds[1][0]" />
+                    <input class="input_num" type="number" v-model="inputDatas[1][0]"
+                        :disabled="!checkBoxCheckeds[1][0]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[1][1]" v-model="checkBoxCheckeds[1][1]" />
+                    <input class="input_num" type="number" v-model="inputDatas[1][1]"
+                        :disabled="!checkBoxCheckeds[1][1]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[1][2]" v-model="checkBoxCheckeds[1][2]" />
+                    <input class="input_num" type="number" v-model="inputDatas[1][2]"
+                        :disabled="!checkBoxCheckeds[1][2]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[1][3]" v-model="checkBoxCheckeds[1][3]" />
+                    <input class="input_num" type="number" v-model="inputDatas[1][3]"
+                        :disabled="!checkBoxCheckeds[1][3]" />
+                </div>
+                <div class="flex flex_align_center">
+                    <div>强化核心：</div>
+                    <input type="checkbox" :checked="checkBoxCheckeds[2][0]" v-model="checkBoxCheckeds[2][0]" />
+                    <input class="input_num" type="number" v-model="inputDatas[2][0]"
+                        :disabled="!checkBoxCheckeds[2][0]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[2][1]" v-model="checkBoxCheckeds[2][1]" />
+                    <input class="input_num" type="number" v-model="inputDatas[2][1]"
+                        :disabled="!checkBoxCheckeds[2][1]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[2][2]" v-model="checkBoxCheckeds[2][2]" />
+                    <input class="input_num" type="number" v-model="inputDatas[2][2]"
+                        :disabled="!checkBoxCheckeds[2][2]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[2][3]" v-model="checkBoxCheckeds[2][3]" />
+                    <input class="input_num" type="number" v-model="inputDatas[2][3]"
+                        :disabled="!checkBoxCheckeds[2][3]" />
+                </div>
+
+                <div class="flex flex_align_center">
+                    <div>通用核心：</div>
+                    <input type="checkbox" :checked="checkBoxCheckeds[3][0]" v-model="checkBoxCheckeds[3][0]" />
+                    <input class="input_num" type="number" v-model="inputDatas[3][0]"
+                        :disabled="!checkBoxCheckeds[3][0]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[3][1]" v-model="checkBoxCheckeds[3][1]" />
+                    <input class="input_num" type="number" v-model="inputDatas[3][1]"
+                        :disabled="!checkBoxCheckeds[3][1]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[3][2]" v-model="checkBoxCheckeds[3][2]" />
+                    <input class="input_num" type="number" v-model="inputDatas[3][2]"
+                        :disabled="!checkBoxCheckeds[3][2]" />
+                    <input type="checkbox" :checked="checkBoxCheckeds[3][3]" v-model="checkBoxCheckeds[3][3]" />
+                    <input class="input_num" type="number" v-model="inputDatas[3][3]"
+                        :disabled="!checkBoxCheckeds[3][3]" />
+                </div>
+                <div class="flex flex_align_center" style="position: relative;">
+                    <p>当前进度：</p>
+                    <progress :value="totalPt" max="100"></progress>
+                    <span style="position: absolute; left: 340px;">{{totalPt}}%</span>
+                </div>
+                <div class="flex flex_align_center">
+                    <p>总共所需：</p>
+                    <span>{{totalNum}}</span>
+                </div>
+                <div class="flex flex_align_center flex_start">
+                    <button @click="initData">初始化</button>
+                    <button @click="calc">开始计算</button>
+                </div>
+
+            </div>
+            <div class="image_div">
+
+                <span class="image_text" id="img_a11" v-if="checkBoxCheckeds[0][0]">{{showDatas[0][0].num}}</span>
+                <span class="image_text" id="img_a12" v-if="checkBoxCheckeds[0][0]">{{showDatas[0][0].pt}}%</span>
+                <span class="image_text" id="img_a21" v-if="checkBoxCheckeds[0][1]">{{showDatas[0][1].num}}</span>
+                <span class="image_text" id="img_a22" v-if="checkBoxCheckeds[0][1]">{{showDatas[0][1].pt}}%</span>
+                <span class="image_text" id="img_a31" v-if="checkBoxCheckeds[0][2]">{{showDatas[0][2].num}}</span>
+                <span class="image_text" id="img_a32" v-if="checkBoxCheckeds[0][2]">{{showDatas[0][2].pt}}%</span>
+                <span class="image_text" id="img_a41" v-if="checkBoxCheckeds[0][3]">{{showDatas[0][3].num}}</span>
+                <span class="image_text" id="img_a42" v-if="checkBoxCheckeds[0][3]">{{showDatas[0][3].pt}}%</span>
+                <span class="image_text" id="img_a51" v-if="checkBoxCheckeds[0][4]">{{showDatas[0][4].num}}</span>
+                <span class="image_text" id="img_a52" v-if="checkBoxCheckeds[0][4]">{{showDatas[0][4].pt}}%</span>
+                <span class="image_text" id="img_a61" v-if="checkBoxCheckeds[0][5]">{{showDatas[0][5].num}}</span>
+                <span class="image_text" id="img_a62" v-if="checkBoxCheckeds[0][5]">{{showDatas[0][5].pt}}%</span>
+
+                <span class="image_text" id="img_b11" v-if="checkBoxCheckeds[1][0]">{{showDatas[1][0].num}}</span>
+                <span class="image_text" id="img_b12" v-if="checkBoxCheckeds[1][0]">{{showDatas[1][0].pt}}%</span>
+                <span class="image_text" id="img_b21" v-if="checkBoxCheckeds[1][1]">{{showDatas[1][1].num}}</span>
+                <span class="image_text" id="img_b22" v-if="checkBoxCheckeds[1][1]">{{showDatas[1][1].pt}}%</span>
+                <span class="image_text" id="img_b31" v-if="checkBoxCheckeds[1][2]">{{showDatas[1][2].num}}</span>
+                <span class="image_text" id="img_b32" v-if="checkBoxCheckeds[1][2]">{{showDatas[1][2].pt}}%</span>
+                <span class="image_text" id="img_b41" v-if="checkBoxCheckeds[1][3]">{{showDatas[1][3].num}}</span>
+                <span class="image_text" id="img_b42" v-if="checkBoxCheckeds[1][3]">{{showDatas[1][3].pt}}%</span>
+
+                <span class="image_text" id="img_c11" v-if="checkBoxCheckeds[2][0]">{{showDatas[2][0].num}}</span>
+                <span class="image_text" id="img_c12" v-if="checkBoxCheckeds[2][0]">{{showDatas[2][0].pt}}%</span>
+                <span class="image_text" id="img_c21" v-if="checkBoxCheckeds[2][1]">{{showDatas[2][1].num}}</span>
+                <span class="image_text" id="img_c22" v-if="checkBoxCheckeds[2][1]">{{showDatas[2][1].pt}}%</span>
+                <span class="image_text" id="img_c31" v-if="checkBoxCheckeds[2][2]">{{showDatas[2][2].num}}</span>
+                <span class="image_text" id="img_c32" v-if="checkBoxCheckeds[2][2]">{{showDatas[2][2].pt}}%</span>
+                <span class="image_text" id="img_c41" v-if="checkBoxCheckeds[2][3]">{{showDatas[2][3].num}}</span>
+                <span class="image_text" id="img_c42" v-if="checkBoxCheckeds[2][3]">{{showDatas[2][3].pt}}%</span>
+
+                <span class="image_text" id="img_d11" v-if="checkBoxCheckeds[3][0]">{{showDatas[3][0].num}}</span>
+                <span class="image_text" id="img_d12" v-if="checkBoxCheckeds[3][0]">{{showDatas[3][0].pt}}%</span>
+                <span class="image_text" id="img_d21" v-if="checkBoxCheckeds[3][1]">{{showDatas[3][1].num}}</span>
+                <span class="image_text" id="img_d22" v-if="checkBoxCheckeds[3][1]">{{showDatas[3][1].pt}}%</span>
+                <span class="image_text" id="img_d31" v-if="checkBoxCheckeds[3][2]">{{showDatas[3][2].num}}</span>
+                <span class="image_text" id="img_d32" v-if="checkBoxCheckeds[3][2]">{{showDatas[3][2].pt}}%</span>
+                <span class="image_text" id="img_d41" v-if="checkBoxCheckeds[3][3]">{{showDatas[3][3].num}}</span>
+                <span class="image_text" id="img_d42" v-if="checkBoxCheckeds[3][3]">{{showDatas[3][3].pt}}%</span>
+            </div>
+
+        </div>
+        <div class="xm_footer" style="font-size: 12px;">
+            <span>秋水家族出品</span>
+            <span>轉載註明出處</span>
+            <a target="_blank" style="color: white;" href="https://space.bilibili.com/391919722">
+                author: 童年小梦
+            </a>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                totalNum: 0,
+                totalPt: 0,
+                checkBoxCheckeds: [
+                    [true, false, false, false, false, false],
+                    [true, false, false, false],
+                    [true, true, true, true],
+                    [true, false, false, false],
+                ],
+                inputDatas: [
+                    [0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0],
+                ],
+                showDatas: [
+                    [
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                    ],
+                    [
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                    ],
+                    [
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                    ],
+                    [
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                        { "num": 0, 'pt': 0 },
+                    ],
+                ],
+                calcTables: [
+                    [0, 30, 35, 40, 45, 50, 55, 60, 65, 200, 80, 90, 100, 110, 120, 130, 140, 150, 160, 350, 170, 180, 190, 200, 210, 220, 230, 240, 250, 500],
+                    [50, 15, 18, 20, 23, 25, 28, 30, 33, 100, 40, 45, 50, 55, 60, 65, 70, 75, 80, 175, 85, 90, 95, 100, 105, 110, 115, 120, 125, 250],
+                    [75, 23, 27, 30, 34, 38, 42, 45, 49, 150, 60, 68, 75, 83, 90, 98, 105, 113, 120, 263, 128, 135, 143, 150, 158, 165, 173, 180, 188, 375],
+                    [125, 38, 44, 50, 57, 63, 69, 75, 82, 300, 110, 124, 138, 152, 165, 179, 193, 207, 220, 525, 234, 248, 262, 275, 289, 303, 317, 330, 344, 750]
+                ],
+                calcTableTotals: [4400, 2252, 3383, 6268]
+            },
+            created() {
+                for (let i = 0; i < this.inputDatas.length; i++) {
+                    for (let j = 0; j < this.inputDatas[i].length; j++) {
+                        this.$watch(() => this.inputDatas[i][j], (newValue, oldValue) => {
+                            this.handleInputDataChange(newValue, oldValue, [i, j]);
+                        });
+                    }
+                }
+            },
+            methods: {
+                handleInputDataChange(newValue, oldValue, index) {
+                    let val = parseInt(newValue)
+                    if (val === 0 || val < 0) {
+                        this.inputDatas[index[0]][index[1]] = 0
+                        return
+                    }
+                    if (val > 30) {
+                        this.inputDatas[index[0]][index[1]] = 30
+                    }
+                },
+                initData() {
+                    this.totalPt = 0
+                    this.totalNum = 0
+                    this.inputDatas = [
+                        [0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                        [0, 0, 0, 0],
+                    ]
+                    this.showDatas = [
+                        [
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                        ],
+                        [
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                        ],
+                        [
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                        ],
+                        [
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                            { "num": 0, 'pt': 0 },
+                        ],
+                    ]
+                    this.checkBoxCheckeds = [
+                        [true, false, false, false, false, false],
+                        [true, false, false, false],
+                        [true, true, true, true],
+                        [true, false, false, false],
+                    ]
+                },
+                calc() {
+                    this.totalNum = 0
+                    this.totalPt = 0
+                    let totalNumMax = 0
+                    let totalPt = 0
+                    let data = this.basicCalcType(0)
+                    totalNumMax += data.total
+                    this.totalNum += data.num
+                    data = this.basicCalcType(1)
+                    totalNumMax += data.total
+                    this.totalNum += data.num
+                    data = this.basicCalcType(2)
+                    totalNumMax += data.total
+                    this.totalNum += data.num
+                    data = this.basicCalcType(3)
+                    totalNumMax += data.total
+                    this.totalNum += data.num
+
+                    totalPt = (((totalNumMax - this.totalNum) / totalNumMax) * 100).toFixed(1)
+
+                    let interval = setInterval(() => {
+                        if (this.totalPt < totalPt) {
+                            this.totalPt++
+                        } else {
+                            clearInterval(interval)
+                        }
+                    }, 10)
+                },
+
+                basicCalcType(type) {
+                    let total = 0
+                    let num = 0
+                    for (let i = 0; i < 6; i++) {
+                        if (this.checkBoxCheckeds[type][i]) {
+                            num += this.basicCalc(type, this.inputDatas[type][i], i)
+                            total += this.calcTableTotals[type]
+                        }
+                    }
+                    return { num, total }
+                },
+                /**
+                 * type = 技能类型 0,1,2,3
+                 * level = 当前等级
+                 * index = 第几个技能 从0开始
+                 */
+                basicCalc(type, level, index) {
+                    level = level < 0 ? 0 : level
+                    level = level > 30 ? 30 : level
+                    let totalExperience = 0
+                    for (let i = level; i < 30; i++) {
+                        totalExperience += this.calcTables[type][i]
+                    }
+                    this.showDatas[type][index].num = totalExperience
+                    this.showDatas[type][index].pt = (((this.calcTableTotals[type] - totalExperience) / this.calcTableTotals[type]) * 100).toFixed(1)
+                    return totalExperience
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
