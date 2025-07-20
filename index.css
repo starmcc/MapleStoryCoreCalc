@@ -132,8 +132,8 @@ progress::-moz-progress-value {
 }
 
 button {
-    margin: 5px 5px;
-    padding: 15px 30px;
+    margin: 5px auto;
+    padding: 32px 50px;
     background-color: #4CAF50;
     color: white;
     border: none;
